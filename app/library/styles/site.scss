@@ -1,0 +1,26 @@
+$base-font-size: 16px;
+$base-line-height: 24px;
+
+$phi: 1.61803398875;
+
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/typography";
+
+body {
+	font: 100%/1.2 Helvetica, Arial;
+}
+
+#interactions { 
+	
+	width: 600px;	
+	margin: auto;
+
+	.label {
+		font: 30px/1 Helvetica, Arial;
+	}
+}
+.description {
+	width: 600px;
+	margin: auto;
+}
