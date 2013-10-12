@@ -51,11 +51,12 @@ define(
 
                 var self = this;
                 var regionData = [
-                    { x: '38%', y: '34%', r: '25%' },
-                    { x: '62%', y: '34%', r: '25%' },
-                    { x: '38%', y: '66%', r: '25%' },
-                    { x: '62%', y: '66%', r: '25%' },
-                    { x: '20%', y: '50%', r: '15%' }
+                    { cx: '38%', cy: '34%', r: '25%' },
+                    { cx: '62%', cy: '34%', r: '25%' },
+                    { cx: '38%', cy: '66%', r: '25%' },
+                    { cx: '62%', cy: '66%', r: '25%' },
+                    { cx: '20%', cy: '50%', r: '15%' },
+                    { cx: '69%', cy: '56%', rx: '26%', ry: '20%' }
                 ];
 
                 var colors = d3.scale.category10();
@@ -64,22 +65,23 @@ define(
                 var regionEls = regions.selectAll('.region')
                     .data( regionData )
                     .enter()
-                    .append('circle')
+                    .append('ellipse')
                     .attr('class', 'region')
-                    .attr('r', '0%')
                     .attr('fill', function( d, idx ){
                         var c = d3.hsl( colors( idx ) ).brighter( 0.8 );
                         d.color = c;
                         return 'hsla('+[c.h, c.s*100+'%', c.l*100 + '%'].join(',')+', 0.25)';
                     })
-                    // .style('opacity', 0.25)
-                    .attr('cx', function( d ){ return d.x; })
-                    .attr('cy', function( d ){ return d.y; })
+                    .attr('cx', function( d ){ return d.cx; })
+                    .attr('cy', function( d ){ return d.cy; })
+                    .attr('rx', '0%')
+                    .attr('ry', '0%')
                     ;
 
                 regionEls.transition()
                     .duration(500)
-                    .attr('r', function( d ){ return d.r; })
+                    .attr('rx', function( d ){ return d.rx || d.r; })
+                    .attr('ry', function( d ){ return d.ry || d.r; })
                     .each('end', function(){
                         regionEls.on('mouseover', function( d, idx ){
                             var el = this;
@@ -117,10 +119,11 @@ define(
 
                 var labelData = [
                     { name: 'W', x: '50%', y: '50%', self: true },
-                    { name: 'H', x: '50%', y: '68%', self: true },
-                    { name: 'Z', x: '50%', y: '78%' },
+                    { name: 'Z', x: '52%', y: '64%' },
+                    { name: 'H', x: '50%', y: '78%', self: true },
                     { name: 'q', x: '30%', y: '50%' },
                     { name: 'l', x: '70%', y: '50%' },
+                    { name: 'ν', x: '88%', y: '50%' },
                     { name: 'γ', x: '50%', y: '30%' },
                     { name: 'g', x: '10%', y: '50%', self: true }
                 ];
