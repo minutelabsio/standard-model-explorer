@@ -17,7 +17,6 @@ define(
         /**
          * Interaction chart module
          * @module InteractionChart
-         * @implements {Stapes}
          */
         var Module = M({
 

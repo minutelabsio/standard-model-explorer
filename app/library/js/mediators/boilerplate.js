@@ -2,13 +2,15 @@ define(
     [
         'jquery',
         'moddef',
-        'modules/visualizations/interactions'//,
+        'modules/visualizations/interactions',
+        'modules/visualizations/fourier-sum'//,
         // './globals'
     ],
     function(
         $,
         M,
-        InteractionChart//,
+        InteractionChart,
+        FourierSum//,
         // globals
     ) {
 
@@ -59,6 +61,10 @@ define(
 
                 InteractionChart({
                     el: $('#interactions').get(0)
+                });
+
+                FourierSum({
+                    el: $('#fourier-sum-demo').get(0)
                 });
             }
 

@@ -29,13 +29,17 @@ require.config({
         'stapes': 'vendor/stapes',
         
         // jQuery
-        'jquery': 'vendor/jquery/jquery',
+        'jquery': 'vendor/jquery',
 
         // d3.js
-        'd3': 'vendor/d3/d3',
+        'd3': 'vendor/d3.min',
 
-        'when': 'vendor/when/when'
+        'kinetic': 'vendor/kinetic'
     },
+
+    packages: [
+        { name: 'when', location: 'vendor/when', main: 'when' }
+    ],
 
     map: {
         
