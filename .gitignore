@@ -3,4 +3,4 @@
 node_modules/
 dist/
 *.css
-
+app/library/js/vendor

@@ -1,12 +1,12 @@
 {
-    "name": "Caffeinated-Boilerplate",
+    "name": "Standard-Model-Explorer",
     "version": "0.0.1",
-    "description": "Boilerplate project setup for general use",
-    "author": "Jasper Palfree <jasper@wellcaffeinated.net>",
+    "description": "Standard Model Educational Site",
+    "author": "Jasper Palfree <info@minutelabs.io>",
     "contributors": [
         {
             "name": "Jasper Palfree",
-            "email": "jasper@wellcaffeinated.net"
+            "email": "info@minutelabs.io"
         }
     ],
     "main": null,
@@ -21,8 +21,13 @@
         "grunt-contrib-jshint": "*",
         "grunt-img": "*",
         "grunt-contrib-requirejs": "*",
-        "grunt-contrib-compass": "*"
+        "grunt-contrib-compass": "*",
+
+        "bower": "*"
     },
     "bundledDependencies": [],
-    "license": "MIT"
+    "license": "MIT",
+    "scripts": {
+        "postinstall": "bower install"
+    }
 }

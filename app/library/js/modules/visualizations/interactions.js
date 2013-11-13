@@ -1,11 +1,11 @@
 define(
     [
         'd3',
-        'stapes'
+        'moddef'
     ],
     function(
         d3,
-        Stapes
+        M
     ) {
 
         'use strict';
@@ -19,7 +19,7 @@ define(
          * @module InteractionChart
          * @implements {Stapes}
          */
-        var Module = Stapes.subclass({
+        var Module = M({
 
             /**
              * Module Constructor
@@ -236,8 +236,6 @@ define(
             }
         });
 
-        return function( cfg ){
-            return new Module( cfg );
-        };
+        return Module;
     }
 );

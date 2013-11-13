@@ -14,6 +14,7 @@ require.config({
         //
         //  This is where you can add paths to any plugins or vendor scripts.
         //
+        'moddef': 'modules/module',
 
         // Plugins
         'text': 'plugins/text',
@@ -28,10 +29,12 @@ require.config({
         'stapes': 'vendor/stapes',
         
         // jQuery
-        'jquery': 'vendor/jquery',
+        'jquery': 'vendor/jquery/jquery',
 
         // d3.js
-        'd3': 'vendor/d3.min'
+        'd3': 'vendor/d3/d3',
+
+        'when': 'vendor/when/when'
     },
 
     map: {

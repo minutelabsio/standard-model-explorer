@@ -1,13 +1,13 @@
 define(
     [
         'jquery',
-        'stapes',
+        'moddef',
         'modules/visualizations/interactions'//,
         // './globals'
     ],
     function(
         $,
-        Stapes,
+        M,
         InteractionChart//,
         // globals
     ) {
@@ -19,7 +19,7 @@ define(
          * @module Boilerplate
          * @implements {Stapes}
          */
-        var Mediator = Stapes.subclass({
+        var Mediator = M({
 
             /**
              * Mediator Constructor
@@ -31,9 +31,12 @@ define(
                 self.initEvents();
 
                 $(function(){
-                    self.emit('domready');
+                    self.resolve('domready');
                 });
 
+                self.after('domready').then(function(){
+                    self.onDomReady()
+                });
             },
 
             /**
@@ -43,8 +46,7 @@ define(
             initEvents : function(){
 
                 var self = this;
-                self.on('domready', self.onDomReady);
-
+                
             },
 
             /**
@@ -60,7 +62,7 @@ define(
                 });
             }
 
-        });
+        }, ['events']);
 
         return new Mediator();
 
