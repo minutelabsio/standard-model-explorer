@@ -44,7 +44,6 @@
         return;
     }
 
-    document.documentElement.appendChild(canvas);
     canvas.id = 'ripple-canvas';
 
     var ripples = [];
@@ -58,9 +57,10 @@
         ripples.push(rip);
     }
 
-    window.addEventListener('mousemove', function(e){
+    var listener = function listener(e){
         ripple(e.pageX, e.pageY);
-    });
+    };
+    window.addEventListener('mousemove', listener);
 
     function now(){
         return (new Date()).getTime();
@@ -74,6 +74,11 @@
     var vel = 0.03;
     var Pi2 = 2 * Math.PI;
     function step(){
+
+        if (canvas.className === 'hidden'){
+            return cleanup();
+        }
+
         window.requestAnimationFrame(step);
         
         var dt = now() - time;
@@ -110,14 +115,32 @@
         }
     }
 
+    var to;
     function fluctuate(){
         
-        setTimeout(fluctuate, Math.random()*6000|0);
+        to = setTimeout(fluctuate, Math.random()*6000|0);
         
         ripple(Math.random()*width, Math.random()*height, Math.random()*20);
     }
 
+    function cleanup(){
+        clearTimeout( to );
+        window.removeEventListener('mousemove', listener);
+        ripples = null;
+        canvas.parentElement.removeChild( canvas );
+    }
+
     fluctuate();
     step();
+
+    function inject(){
+        if (!document.body){
+            setTimeout(inject, 50);
+        } else {
+            document.body.appendChild(canvas);
+        }
+    }
+
+    inject();
 
 })(this, this.document);
