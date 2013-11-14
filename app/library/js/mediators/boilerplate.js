@@ -58,14 +58,17 @@ define(
             onDomReady : function(){
 
                 var self = this;
+                return;
 
                 InteractionChart({
-                    el: $('#interactions').get(0)
+                    el: $('<div>').appendTo('#viewport').get(0)
                 });
 
                 FourierSum({
-                    el: $('#fourier-sum-demo').get(0)
+                    el: $('<div>').appendTo('#viewport').get(0)
                 });
+
+                $('html').removeClass('loading');
             }
 
         }, ['events']);

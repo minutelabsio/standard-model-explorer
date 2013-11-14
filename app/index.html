@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html class="no-js loading">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,24 +12,20 @@
 
   <!-- js includes -->
   <script src="library/js/vendor/modernizr.js"></script>
-  <script src="library/js/vendor/require.js" data-main="library/js/page-boilerplate"></script>
+  <script src="library/js/page-intro.js"></script>
+  <script src="library/js/vendor/require.js" data-main="library/js/page-boilerplate" async></script>
 </head>
 <body>
     
   <div id="viewport">
-    <section>
-      <h2>Diagram of Interactions between Elementary Particles</h2>
-      <div id="interactions"></div>
-      <div class="description">
-        <p>The fundamental particles are arranged so that inside any given circular region, the particles in that region interact with each other.</p>
-        <p>The particles with thick outlines also interact with themselves</p>
-      </div>
-    </section>
-
-    <section>
-      <h2>Fourier Sum demo</h2>
-      <div id="fourier-sum-demo"></div>
-    </section>
+    <div id="intro-text">
+        <p>What we think of as particles &mdash; the parts of atoms, electricity, light &mdash; are best described as ripples in fields.</p>
+        <p>These ripples are called <em>quanta</em>.</p>
+    </div>
+    <div id="loading-status">
+      <img src="library/images/logo-no-text-minute-labs.png" width="121" height="115"/>
+      <p class="loading-text">Loading<span class="dots"><span></span><span></span><span></span></span></p>
+    </div>
   </div>
 
 </body>
