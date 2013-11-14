@@ -4,6 +4,12 @@
 require.config({
     
     shim: {
+        'timbre': {
+            exports: 'T',
+            init: function(){
+                return this.T.noConflict();
+            }
+        },
         // Add shims for things here
         'd3': {
             exports: 'd3'
@@ -29,6 +35,8 @@ require.config({
         'stapes': 'vendor/stapes',
 
         'lodash': 'vendor/lodash.min',
+
+        'timbre': 'vendor/timbre',
         
         // jQuery
         'jquery': 'vendor/jquery',

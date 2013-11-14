@@ -6,6 +6,8 @@ define(
         'modules/visualizations/interactions',
         'modules/visualizations/fourier-sum',
 
+        'modules/visualizations/quantized-volume',
+
         // templates
         'tpl!templates/paginator.tpl',
         'tpl!templates/about.tpl',
@@ -18,6 +20,7 @@ define(
         M,
         InteractionChart,
         FourierSum,
+        QuantizedVolume,
 
         tplPaginator,
         tplAbout,
@@ -48,9 +51,7 @@ define(
                 self.initPages();
 
                 $(function(){
-                    setTimeout(function(){
-                        self.resolve('domready');
-                    }, 1000);
+                    self.resolve('domready');
                 });
 
                 self.after('domready').then(function(){
@@ -74,6 +75,11 @@ define(
 
                     var rc = $('#ripple-canvas').addClass('hidden');
                     self.resolve('begin');
+                    return !1;
+                });
+
+                $(document).on('click', '.ctrl-continue', function(){
+                    self.emit('paginate', 1);
                     return !1;
                 });
 
@@ -119,11 +125,20 @@ define(
             },
 
             initPages: function(){
-                var self = this;
+                
+                var self = this
+                    ,pages = []
+                    ,pageModules = []
+                    ,p
+                    ;
 
-                var pages = [];
+                p = $(tplAbout.render());
+                pageModules.push(false);
+                pages.push( p.get(0) );
 
-                pages.push( $(tplAbout.render()).get(0) );
+                p = QuantizedVolume();
+                pageModules.push( p );
+                pages.push( p.el.get(0) );
 
                 self.pages = $( pages ).hide();
                 self.currentPage = 0;
