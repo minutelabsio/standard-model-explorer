@@ -4,19 +4,36 @@
 
 $base-font-size: 18px;
 $base-line-height: 24px;
-$font-family-minute-labs: 'sf_cartoonist_handregular', Helvetica, Arial, sans-serif;
+$font-family-minute-labs: 'sf_cartoonist_hand', Helvetica, Arial, sans-serif;
 $font-family-sans-serif: 'colaborate-light', Helvetica, Arial, sans-serif;
 
 $phi: 1.61803398875;
+
+$lightText: #F5F3D1;
+
+$btnBg: #333;
+$btnBgHover: #794D1F;
 
 @import "compass/reset";
 @import "compass/css3";
 @import "compass/typography";
 @import "_animations";
 
+* {
+    @include box-sizing( border-box );
+}
+
 body {
     font: 112.5%/1.3 $font-family-sans-serif;
     color: #333;
+}
+
+em {
+    font-style: italic;
+}
+
+strong {
+    font-style: 700;
 }
 
 p {
@@ -32,32 +49,82 @@ h2 {
 }
 
 #viewport {
-    // position: relative;
-    width: 600px;
-    margin: 2em auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 1;
+    overflow: hidden;
+}
+
+#pages {
+    width: 100%;
+    height: 100%;
+
+    @include transition( transform 1s ease-out );
+
+    > section {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
 }
 
 // buttons
 
 .btn {
     display: inline-block;
-    background: #333;
-    color: #F5F3D1;
+    text-align: center;
+    background: $btnBg;
+    color: $lightText;
     padding: 0.4em 1em;
     border: 1px solid #444;
     text-decoration: none;
     font: 30px/1 $font-family-minute-labs;
     letter-spacing: 1px;
+    outline: none;
     @include border-radius( 5px );
     @include transition( background .3s ease-out );
 
     &:hover {
-        background: #794D1F;
+        background: $btnBgHover;
     }
 
     &:active {
-        background: #333;
+        background: $btnBg;
+    }
+}
+
+// paginator
+#paginator {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    right: 5px;
+    width: 30px;
+    height: 100px;
+    margin-top: -50px;
+
+    .btn {
+        padding: 0.2em;
+        width: 100%;
+    }
+
+    input {
+        width: 100%;
+        border: 1px solid #333;
+        background: #444;
+        color: $lightText;
+        font-size: 20px;
+        text-align: center;
+        padding: 0.2em 0;
+        outline: none;
+        @include border-radius( 5px );
+
+        &:focus {
+            background: $btnBgHover;
+        }
     }
 }
 
@@ -160,3 +227,5 @@ h2 {
     width: 600px;
     margin: auto;
 }
+
+

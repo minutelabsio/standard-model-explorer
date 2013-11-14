@@ -27,6 +27,8 @@ require.config({
 
         // MVC
         'stapes': 'vendor/stapes',
+
+        'lodash': 'vendor/lodash.min',
         
         // jQuery
         'jquery': 'vendor/jquery',
