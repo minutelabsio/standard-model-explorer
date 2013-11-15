@@ -1,53 +1,18 @@
 define(
     [
         'kinetic',
-        'moddef'
+        'moddef',
+        'modules/vis-utils'
     ],
     function(
         Kinetic,
-        M
+        M,
+        VisUtils
     ) {
 
         'use strict';
 
-        var PI2 = 2*Math.PI;
-
-        function wave( f, w, A, dx, dy ){
-
-            var res = 2
-                ,x = 0
-                ,data = []
-                ,pt
-                ,l = f.length
-                ,norm = 1/l
-                ,i
-                ;
-
-            A *= 0.5;
-
-            while ( x < w ){
-
-                pt = {
-                    x: x,
-                    y: 0
-                }
-
-                if ( l ){
-                    i = 0;
-                    while ( i < l ){
-                        pt.y += -A * (Math.cos( PI2 * f[ i ] * (x + dx) ) - 1) + dy
-                        i++;
-                    }
-                    pt.y *= norm;
-                } else {
-                    pt.y = -A * (Math.cos( PI2 * f * (x + dx) ) - 1) + dy
-                }
-                data.push( pt );
-                x += res;
-            }
-
-            return data;
-        }
+        var wave = VisUtils.wave;
 
         var defaults = {
             el: null

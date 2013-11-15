@@ -65,6 +65,7 @@ h2 {
     bottom: 0;
     z-index: 1;
     overflow: hidden;
+    @include transform( translateZ(0) );
 }
 
 #pages {
@@ -253,6 +254,7 @@ h2 {
         width: 300px;
         margin: auto;
         border: #444;
+        background: #333;
     }
 }
 
