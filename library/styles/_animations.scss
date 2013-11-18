@@ -1,0 +1,59 @@
+@-webkit-keyframes loading-dots {
+    from {
+        @include opacity(0.4);
+    }
+    33% {
+        @include opacity(1);
+    }
+    to {
+        @include opacity(0.4);
+    }
+}
+
+@-moz-keyframes loading-dots {
+    from {
+        @include opacity(0.4);
+    }
+    33% {
+        @include opacity(1);
+    }
+    to {
+        @include opacity(0.4);
+    }
+}
+
+@-ms-keyframes loading-dots {
+    from {
+        @include opacity(0.4);
+    }
+    33% {
+        @include opacity(1);
+    }
+    to {
+        @include opacity(0.4);
+    }
+}
+
+@-o-keyframes loading-dots {
+    from {
+        @include opacity(0.4);
+    }
+    33% {
+        @include opacity(1);
+    }
+    to {
+        @include opacity(0.4);
+    }
+}
+
+@keyframes loading-dots {
+    from {
+        @include opacity(0.4);
+    }
+    33% {
+        @include opacity(1);
+    }
+    to {
+        @include opacity(0.4);
+    }
+}
