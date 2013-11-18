@@ -5,7 +5,7 @@ define(
     function(
         events
     ){
-
+        var hasOwn = ({}).hasOwnProperty;
 
         // mixins registry
         var _mixins = {

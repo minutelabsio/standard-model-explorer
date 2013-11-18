@@ -31,8 +31,8 @@
 }(this));
 
 (function(window, document, undefined){
-    var height = document.height;
-    var width = document.width;
+    var height = window.innerHeight;
+    var width = window.innerWidth;
     var canvas = document.createElement('canvas');
     var ctx;
     canvas.width = width;
@@ -75,11 +75,11 @@
     var Pi2 = 2 * Math.PI;
     function step(){
 
-        if (canvas.className === 'hidden'){
-            return cleanup();
-        }
-
         window.requestAnimationFrame(step);
+
+        if (canvas.className === 'hidden'){
+            return; //cleanup();
+        }
         
         var dt = now() - time;
         time += dt;
@@ -87,8 +87,8 @@
         // reset
         canvas.width = canvas.width;
         
-        var rip;
-        for (var i = 0, l = ripples.length; i < l; i++){
+        var rip, i, l;
+        for (i = 0, l = ripples.length; i < l; i++){
             rip = ripples[i];
             rip.radius += dt * vel;
             
@@ -98,12 +98,12 @@
         // draw
         ctx.strokeWidth = 2;
         var op;
-        for (var i = 0, l = ripples.length; i < l; i++){
+        for (i = 0, l = ripples.length; i < l; i++){
             rip = ripples[i];
             op = lerp(0.9, 0, rip.radius/60);
             
             if (op <= 0.01){
-                ripples.splice(i, 1)
+                ripples.splice(i, 1);
                 i--;
                 l--;
             } else {

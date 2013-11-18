@@ -2,6 +2,8 @@
  * Config options at: http://requirejs.org/docs/api.html#config
  */
 require.config({
+
+    // urlArgs: 'v='+(new Date()).getTime(),
     
     shim: {
         'timbre': {

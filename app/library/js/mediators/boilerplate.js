@@ -3,10 +3,11 @@ define(
         'jquery',
         'lodash',
         'moddef',
+
         'modules/visualizations/interactions',
         'modules/visualizations/fourier-sum',
-
         'modules/visualizations/quantized-volume',
+        'modules/visualizations/uncertainty-principal',
 
         // templates
         'tpl!templates/paginator.tpl',
@@ -21,6 +22,7 @@ define(
         InteractionChart,
         FourierSum,
         QuantizedVolume,
+        UPDemo,
 
         tplPaginator,
         tplAbout,
@@ -30,7 +32,7 @@ define(
         'use strict';
 
         function errback(){
-            console.log(arguments)
+            window.console.log(arguments);
         }
 
         /**
@@ -49,6 +51,7 @@ define(
                 var self = this;
                 self.initEvents();
                 self.initPages();
+
 
                 $(function(){
                     self.resolve('domready');
@@ -73,8 +76,8 @@ define(
                 
                 $(document).on('click', '#ctrl-start', function(){
 
-                    var rc = $('#ripple-canvas').addClass('hidden');
                     self.resolve('begin');
+                    self.page( 1 );
                     return !1;
                 });
 
@@ -115,12 +118,15 @@ define(
 
                 self.after('begin').then(function(){
                     self.pages.show();
-                    self.page( 1 );
                     self.pages.first().fadeIn('fast');
 
                     self.on('paginate', function(e, n){
                         self.page( self.currentPage + n );
                     });
+                });
+
+                self.on('page', function( e, p ){
+                    $('#ripple-canvas').toggleClass('hidden', p !== 0);
                 });
             },
 
@@ -132,9 +138,9 @@ define(
                     ,p
                     ;
 
-                p = $(tplAbout.render());
-                pageModules.push(false);
-                pages.push( p.get(0) );
+                // p = $(tplAbout.render());
+                // pageModules.push( false );
+                // pages.push( p.get(0) );
 
                 p = QuantizedVolume();
                 pageModules.push( p );
@@ -144,7 +150,12 @@ define(
                 pageModules.push( p );
                 pages.push( p.el.get(0) );
 
+                p = UPDemo();
+                pageModules.push( p );
+                pages.push( p.el.get(0) );
+
                 self.pages = $( pages ).hide();
+                self.pageModules = pageModules;
                 self.currentPage = 0;
             },
 
@@ -158,10 +169,18 @@ define(
 
             page: function( n ){
 
-                var self = this;
+                var self = this
+                    ,mod
+                    ;
                 n = n|0;
+                
                 if (n < 0 || n > self.pages.length){
                     return;
+                }
+
+                mod = self.pageModules[ self.currentPage ];
+                if ( mod ){
+                    mod.emit('unload');
                 }
 
                 self.currentPage = n;
@@ -169,8 +188,16 @@ define(
                 var y = -self.currentPage * $(window).height();
                 
                 if ( window.Modernizr.csstransforms ){
-                    self.$pages.css('transform', 'translate(0, '+ y +'px');
+                    self.$pages.css('transform', 'translate(0px, '+ y +'px');
                 }
+
+                mod = self.pageModules[ self.currentPage ];
+
+                if ( mod ){
+                    mod.emit('load');
+                }
+
+                self.emit('page', n);
             },
 
             /**
@@ -183,13 +210,17 @@ define(
 
                 self.$vp = $('#viewport');
                 self.$pages = $('#pages');
+
                 self.$pages.append( self.pages );
                 self.resize();
-
+                
                 self.$paginator = $( tplPaginator.render() ).appendTo( self.$vp );
 
                 $('#loading-status .loading-text').replaceWith('<a href="#" id="ctrl-start" class="btn">Begin!</a>');
 
+                self.pageModules.unshift( false );
+                self.pages.unshift( $('#page-intro').get(0) );
+                
                 $('html').removeClass('loading');
                 
                 // InteractionChart({

@@ -2,7 +2,7 @@ define(['moddef'], function( M ){
 
     var PI2 = 2*Math.PI;
 
-    var wave = function wave( f, w, A, dx, dy, res ){
+    var wave = function wave( f, A, w, dx, dy, res ){
 
         var x = 0
             ,data = []
@@ -14,24 +14,22 @@ define(['moddef'], function( M ){
 
         res = res || 2;
 
-        A *= 0.5;
-
         while ( x < w ){
 
             pt = {
                 x: x,
                 y: 0
-            }
+            };
 
             if ( l ){
                 i = 0;
                 while ( i < l ){
-                    pt.y += -A * (Math.cos( PI2 * f[ i ] * (x + dx) ) - 1) + dy
+                    pt.y += -0.5 * (A.length? A[ i ] : A) * (Math.cos( PI2 * f[ i ] * (x + dx) ) - 1) + dy;
                     i++;
                 }
                 pt.y *= norm;
             } else {
-                pt.y = -A * (Math.cos( PI2 * f * (x + dx) ) - 1) + dy
+                pt.y = - 0.5 * A * (Math.cos( PI2 * f * (x + dx) ) - 1) + dy;
             }
             data.push( pt );
             x += res;
@@ -74,7 +72,7 @@ define(['moddef'], function( M ){
             }
             loop();
         }
-    }, ['events']));
+    }, ['events']))();
 
     return {
         wave: wave,

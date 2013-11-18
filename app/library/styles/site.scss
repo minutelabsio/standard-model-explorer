@@ -18,7 +18,7 @@ $btnBgHover: #794D1F;
 
 $grid-background-force-fluid: true;
 $blueprint-liquid-grid-columns: 24;
-$blueprint-liquid-grid-margin: 10/980 * 100%;
+$blueprint-liquid-grid-margin: 20/980 * 100%;
 $blueprint-liquid-grid-width: ((100% - $blueprint-liquid-grid-margin * ($blueprint-liquid-grid-columns - 1))/$blueprint-liquid-grid-columns);
 $blueprint-liquid-container-width: 100%;
 $blueprint-liquid-container-min-width: none;
@@ -60,6 +60,11 @@ h2 {
 }
 
 // helpers
+.hidden {
+    display: none;
+    visibility: hidden;
+}
+
 .right {
     float: right;
 }
@@ -285,6 +290,24 @@ h2 {
     .desc {
         margin-top: 4em;
         margin-left: 4em;
+    }
+}
+
+// up-demo
+#page-uncertainty-principal {
+    
+    padding: 10%;
+
+    .desc {
+        
+    }
+
+    .vis {
+        margin: 0 auto 4em;
+    }
+
+    .video {
+        width: 100%;
     }
 }
 

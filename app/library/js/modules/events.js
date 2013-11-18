@@ -99,18 +99,26 @@ define(
                 return this;
             },
             
-            after: function( name ){
+            after: function( name, fn ){
 
-                var dfd = this._dfds || (this._dfds = {});
+                var dfds = this._dfds || (this._dfds = {})
+                    ,dfd = (dfds[ name ] || (dfds[ name ] = when.defer()))
+                    ;
 
-                return (dfd[ name ] || (dfd[ name ] = when.defer())).promise;
+                if ( fn ){
+                    return dfd.promise.then( fn );
+                }
+
+                return dfd.promise;
             },
 
             resolve: function( name, arg ){
 
-                var dfd = this._dfds || (this._dfds = {});
-
-                (dfd[ name ] || (dfd[ name ] = when.defer())).resolve( arg );
+                var dfds = this._dfds || (this._dfds = {})
+                    ,dfd = (dfds[ name ] || (dfds[ name ] = when.defer()))
+                    ;
+                    
+                dfd.resolve( arg );
                 return this;
             }
         };

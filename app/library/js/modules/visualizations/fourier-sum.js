@@ -45,8 +45,13 @@ define(
 
                 self.modes = [];
                 var f = 1/self.width;
+                var amps = [];
+                var l = 6;
+                while ( l-- ){
+                    amps.push( Math.exp( - 0.05 * ((l - 6)) * ((l - 6)) ) * 100 );
+                }
 
-                var sum = self.addMode( 0.002, true, '=' );
+                var sum = self.addMode( 0.002, false, '=', amps );
                 self.addMode( f * 6, true, '+' );
                 self.addMode( f * 5, true, '+' );
                 self.addMode( f * 4, true, '+' );
@@ -69,7 +74,7 @@ define(
                 self.emit('change:mode')
             },
 
-            addMode: function( w, changeable, symbol ){
+            addMode: function( w, changeable, symbol, A ){
 
                 var self = this
                     ,modes = self.modes
@@ -80,6 +85,7 @@ define(
                     ,dy = self.height - (h + 10) * (l+1)
                     ,group
                     ,obj = {
+                        amp: A || (h - 20),
                         freq: w
                     }
                     ;
@@ -117,7 +123,7 @@ define(
 
                 obj.setFreq = function( f ){
                     obj.freq = f;
-                    obj.spline.setPoints( wave( f, wid, h-20, -wid/2, 10+dy ) );
+                    obj.spline.setPoints( wave( f, obj.amp, wid, -wid/2, 10+dy ) );
                     obj.layer.draw();
                 };
 
