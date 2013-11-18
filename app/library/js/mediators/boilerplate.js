@@ -140,6 +140,10 @@ define(
                 pageModules.push( p );
                 pages.push( p.el.get(0) );
 
+                p = FourierSum();
+                pageModules.push( p );
+                pages.push( p.el.get(0) );
+
                 self.pages = $( pages ).hide();
                 self.currentPage = 0;
             },
@@ -189,10 +193,6 @@ define(
                 $('html').removeClass('loading');
                 
                 // InteractionChart({
-                //     el: $('<div>').appendTo('#viewport').get(0)
-                // });
-
-                // FourierSum({
                 //     el: $('<div>').appendTo('#viewport').get(0)
                 // });
 

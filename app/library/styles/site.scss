@@ -1,11 +1,13 @@
 @import "_fontface";
+
+// @TODO remove extraneous fonts
 @import url(http://fonts.googleapis.com/css?family=Cutive+Mono|Marcellus|Montaga);
 
 
 $base-font-size: 18px;
 $base-line-height: 24px;
 $font-family-minute-labs: 'sf_cartoonist_hand', Helvetica, Arial, sans-serif;
-$font-family-sans-serif: 'colaborate-light', Helvetica, Arial, sans-serif;
+$font-family-sans-serif: 'pt-sans', Helvetica, Arial, sans-serif;
 
 $phi: 1.61803398875;
 
@@ -42,7 +44,7 @@ em {
 }
 
 strong {
-    font-style: 700;
+    font-weight: 700;
 }
 
 p {
@@ -57,6 +59,25 @@ h2 {
     font-size: 1.4em;
 }
 
+// helpers
+.right {
+    float: right;
+}
+
+.cols-2 {
+    @include container;
+
+    .col {
+        @include column( 12 );
+
+    }
+
+    .col:last-child {
+        @include column( 12, true );
+    }
+}
+
+// main
 #viewport {
     position: absolute;
     top: 0;
@@ -111,11 +132,10 @@ h2 {
 #paginator {
     position: absolute;
     z-index: 2;
-    top: 50%;
+    top: 6px;
     right: 5px;
     width: 30px;
     height: 100px;
-    margin-top: -50px;
 
     .btn {
         padding: 0.2em;
@@ -225,23 +245,22 @@ h2 {
 
 // quantized volume diagrams
 #page-quantized-volume {
-    @include container;
     padding: 10%;
-
 
     font-size: 20px;
 
     .desc {
         width: 80%;
-        margin: 2em auto;
+        margin: 2em auto 3em;
     }
 
     .col {
-        text-align: center;
-        @include column( 12 );
-    }
-    .col:last-child {
-        @include column( 12, true );
+        p {
+            font-size: 0.85em;
+            width: 300px;
+            height: 150px;
+            margin: auto;
+        }
     }
 
     input {
@@ -258,6 +277,16 @@ h2 {
     }
 }
 
+// fourier sum 
+#page-fourier-sum {
+    .vis {
+        margin: 3.75em auto;
+    }
+    .desc {
+        margin-top: 4em;
+        margin-left: 4em;
+    }
+}
 
 // interaction diagram
 #interactions { 

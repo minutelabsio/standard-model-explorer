@@ -2,12 +2,14 @@ define(
     [
         'kinetic',
         'moddef',
-        'modules/vis-utils'
+        'modules/vis-utils',
+        'tpl!templates/fourier-sum.tpl'
     ],
     function(
         Kinetic,
         M,
-        VisUtils
+        VisUtils,
+        tplFourierSum
     ) {
 
         'use strict';
@@ -31,16 +33,12 @@ define(
 
                 var self = this;
 
-                self.width = 600;
-                self.height = 600;
+                self.width = 400;
+                self.height = 640;
 
-                if (!cfg.el){
-                    return;
-                }
-
-                self.el = cfg.el;
+                self.el = $( tplFourierSum.render({ module: self }) );
                 self.stage = new Kinetic.Stage({
-                    container: self.el,
+                    container: self.el.find('.vis').width( self.width ).height( self.height ).get(0),
                     width: self.width,
                     height: self.height
                 });
@@ -48,10 +46,12 @@ define(
                 self.modes = [];
                 var f = 1/self.width;
 
-                var sum = self.addMode( 0.002, true );
-                self.addMode( f * 4, true );
-                self.addMode( f * 3, true );
-                self.addMode( f * 2, true );
+                var sum = self.addMode( 0.002, true, '=' );
+                self.addMode( f * 6, true, '+' );
+                self.addMode( f * 5, true, '+' );
+                self.addMode( f * 4, true, '+' );
+                self.addMode( f * 3, true, '+' );
+                self.addMode( f * 2, true, '+' );
                 self.addMode( f, true );
                 
                 
@@ -69,12 +69,14 @@ define(
                 self.emit('change:mode')
             },
 
-            addMode: function( w, changeable ){
+            addMode: function( w, changeable, symbol ){
 
                 var self = this
                     ,modes = self.modes
                     ,l = modes.length
-                    ,h = 100
+                    ,paddingLeft = 25
+                    ,wid = self.width - paddingLeft
+                    ,h = 80
                     ,dy = self.height - (h + 10) * (l+1)
                     ,group
                     ,obj = {
@@ -86,25 +88,36 @@ define(
                 group = new Kinetic.Group();
 
                 group.add(new Kinetic.Rect({
-                    x: 1,
+                    x: paddingLeft + 1,
                     y: dy+1,
-                    width: self.width-2,
+                    width: wid-2,
                     height: h,
                     stroke: 'rgba(0,0,0,0.2)',
                     strokeWidth: 0.5
                 }));
 
+                obj.symbol = new Kinetic.Text({
+                    x: 0,
+                    y: dy + h/2 - 20,
+                    text: symbol || '',
+                    fontSize: 40,
+                    fontFamily: 'pt-sans',
+                    fill: '#000'
+                });
+
                 obj.spline = new Kinetic.Spline({
                     points: [0,0],
                     stroke: 'rgba(59, 157, 222, 0.9)',
-                    strokeWidth: 1,
+                    strokeWidth: 2,
                     lineCap: 'round',
                     tension: 0.5
                 });
 
+                obj.spline.setOffsetX( -paddingLeft - 1 );
+
                 obj.setFreq = function( f ){
                     obj.freq = f;
-                    obj.spline.setPoints( wave( f, self.width, h-20, -self.width/2, 10+dy ) );
+                    obj.spline.setPoints( wave( f, wid, h-20, -wid/2, 10+dy ) );
                     obj.layer.draw();
                 };
 
@@ -138,6 +151,7 @@ define(
 
                 obj.setFreq( obj.freq );
 
+                group.add(obj.symbol);
                 group.add(obj.spline);
                 obj.layer.add(group);
                 self.stage.add(obj.layer);

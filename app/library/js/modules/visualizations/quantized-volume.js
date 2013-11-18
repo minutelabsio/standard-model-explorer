@@ -1,13 +1,11 @@
 define(
     [
-        'timbre',
         'moddef',
         'modules/vis-utils',
 
         'tpl!templates/quantized-volume.tpl'
     ],
     function(
-        T,
         M,
         VisUtils,
         tplQuantizedVolume
