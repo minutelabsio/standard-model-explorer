@@ -2,6 +2,7 @@ define(
     [
         'jquery',
         'moddef',
+        'tween',
         'when',
         'tpl!templates/background-info.tpl',
         'modules/generative-tree',
@@ -17,21 +18,13 @@ define(
     function(
         $,
         M,
+        TWEEN,
         when,
         tplBackgroundInfo,
         Tree,
 
         Physics
     ) {
-
-        var easeInQuad = function (x, t, b, c, d) {
-                return c*(t/=d)*t + b;
-        };
-
-        var easeInOutQuad = function (x, t, b, c, d) {
-                if ((t/=d/2) < 1) return c/2*t*t + b;
-                return -c/2 * ((--t)*(t-2) - 1) + b;
-        };
 
         var Module = M({
 
@@ -135,6 +128,15 @@ define(
                         self.animParticleSplit();
                         setTimeout(function(){
                             self.zoomTo(0, 0.5 * self.height - 200, 200, 3000);
+                            $(self.renderer.el).delay(1000).animate({
+                                opacity: 0
+                            }, {
+                                easing: 'linear',
+                                duration: 1000,
+                                complete: function(){
+                                    self.world.pause();
+                                }
+                            });
                         }, 3000);
                     });
                     
@@ -226,38 +228,33 @@ define(
 
                 var self = this
                     ,dfd = when.defer()
-                    ,si = self.renderer.root.scale.x || 1
-                    ,ds = scale - si
-                    ,s = si
-                    ,xi = self.renderer.root.position.x
-                    ,dx = -ds * (0.5 * self.width + x) - xi
-                    ,yi = self.renderer.root.position.y
-                    ,dy = -ds * (0.5 * self.height + y) - yi
-                    ,step
-                    ,ts
+                    ,root = self.renderer.root
+                    ,tween = new TWEEN.Tween({
+                        x: self.renderer.root.position.x,
+                        y: self.renderer.root.position.y,
+                        scale: self.renderer.root.scale.x || 1
+                    })
+                    ,step = $.proxy(tween.update, tween)
                     ;
 
-                x = xi;
-                y = yi;
-
-                step = function( t ){
-                    ts = ts || t;
-                    dt = t - ts;
-                    if ( dt > dur ){
+                tween.to({
+                        x: -scale * (0.5 * self.width + x),
+                        y: -scale * (0.5 * self.height + y),
+                        scale: scale
+                    }, dur)
+                    .easing( TWEEN.Easing.Quadratic.In )
+                    .onUpdate( function(){
+                        root.scale.x = this.scale;
+                        root.scale.y = this.scale;
+                        root.position.x = this.x;
+                        root.position.y = this.y;
+                    } )
+                    .onComplete( function(){
                         dfd.resolve();
                         Physics.util.ticker.unsubscribe( step );
-                        return;
-                    }
-
-                    s = easeInOutQuad(s, dt, si, ds, dur);
-                    self.renderer.root.scale.x = s;
-                    self.renderer.root.scale.y = s;
-
-                    x = easeInOutQuad(x, dt, xi, dx, dur);
-                    self.renderer.root.position.x = x;
-                    y = easeInOutQuad(y, dt, yi, dy, dur);
-                    self.renderer.root.position.y = y;
-                };
+                    } )
+                    .start()
+                    ;
 
                 Physics.util.ticker.subscribe( step );
 

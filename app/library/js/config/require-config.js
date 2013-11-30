@@ -9,6 +9,9 @@ require.config({
         'pixi': {
             exports: 'PIXI'
         },
+        'tween': {
+            exports: 'TWEEN'
+        },
         'timbre': {
             exports: 'T',
             init: function(){
@@ -48,6 +51,8 @@ require.config({
 
         // d3.js
         'd3': 'vendor/d3.min',
+
+        'tween': 'vendor/Tween',
 
         'pixi': 'vendor/pixi',
         'kinetic': 'vendor/kinetic',
