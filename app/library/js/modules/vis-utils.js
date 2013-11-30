@@ -1,5 +1,7 @@
 define(['moddef'], function( M ){
 
+    'use strict';
+
     var PI2 = 2*Math.PI;
 
     var wave = function wave( f, A, w, dx, dy, res ){

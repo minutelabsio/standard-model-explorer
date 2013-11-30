@@ -4,6 +4,7 @@ define(
         'lodash',
         'moddef',
 
+        'modules/visualizations/background-info',
         'modules/visualizations/interactions',
         'modules/visualizations/fourier-sum',
         'modules/visualizations/quantized-volume',
@@ -19,6 +20,8 @@ define(
         $,
         _,
         M,
+
+        BackgroundInfo,
         InteractionChart,
         FourierSum,
         QuantizedVolume,
@@ -141,6 +144,10 @@ define(
                 // p = $(tplAbout.render());
                 // pageModules.push( false );
                 // pages.push( p.get(0) );
+                
+                p = BackgroundInfo();
+                pageModules.push( p );
+                pages.push( p.el.get(0) );
 
                 p = QuantizedVolume();
                 pageModules.push( p );
@@ -180,7 +187,7 @@ define(
 
                 mod = self.pageModules[ self.currentPage ];
                 if ( mod ){
-                    mod.emit('unload');
+                    mod.emit('unload', self);
                 }
 
                 self.currentPage = n;
@@ -194,7 +201,7 @@ define(
                 mod = self.pageModules[ self.currentPage ];
 
                 if ( mod ){
-                    mod.emit('load');
+                    mod.emit('load', self);
                 }
 
                 self.emit('page', n);

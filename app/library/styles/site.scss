@@ -247,6 +247,58 @@ h2 {
 
 
 // general stuff
+// 
+
+#page-background-info {
+    position: relative;
+    > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .btn-play {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 100;
+        width: 100px;
+        height: 100px;
+        margin-top: -50px;
+        margin-left: -50px;
+        background: #111;
+        border: none;
+        outline: none;
+        color: #fff;
+        font: 0/0 'a';
+        text-align: center;
+        line-height: 0px;
+        cursor: pointer;
+        @include border-radius( 50% );
+
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -19px;
+            margin-left: -9px;
+            border-style: solid;
+            border-width: 20px 30px;
+            border-color: transparent transparent transparent #fff;
+        }
+
+        &:hover {
+            background: steelblue;
+        }
+    }
+
+    &.playing .btn-play {
+        display: none;
+    }
+}
 
 // quantized volume diagrams
 #page-quantized-volume {

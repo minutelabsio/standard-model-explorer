@@ -1,15 +1,18 @@
 define(
     [
+        'jquery',
         'moddef',
         'modules/vis-utils',
 
         'tpl!templates/quantized-volume.tpl'
     ],
     function(
+        $,
         M,
         VisUtils,
         tplQuantizedVolume
     ) {
+        'use strict';
 
         var Pi2 = Math.PI * 2;
 

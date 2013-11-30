@@ -6,6 +6,9 @@ require.config({
     // urlArgs: 'v='+(new Date()).getTime(),
     
     shim: {
+        'pixi': {
+            exports: 'PIXI'
+        },
         'timbre': {
             exports: 'T',
             init: function(){
@@ -46,11 +49,18 @@ require.config({
         // d3.js
         'd3': 'vendor/d3.min',
 
-        'kinetic': 'vendor/kinetic'
+        'pixi': 'vendor/pixi',
+        'kinetic': 'vendor/kinetic',
+
     },
 
     packages: [
-        { name: 'when', location: 'vendor/when', main: 'when' }
+        { name: 'when', location: 'vendor/when', main: 'when' },
+        {
+            name: 'physicsjs',
+            location: 'vendor/physicsjs',
+            main: 'physicsjs-0.5.3'
+        }
     ],
 
     map: {

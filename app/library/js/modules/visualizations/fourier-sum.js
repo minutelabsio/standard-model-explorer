@@ -1,11 +1,13 @@
 define(
     [
+        'jquery',
         'kinetic',
         'moddef',
         'modules/vis-utils',
         'tpl!templates/fourier-sum.tpl'
     ],
     function(
+        $,
         Kinetic,
         M,
         VisUtils,

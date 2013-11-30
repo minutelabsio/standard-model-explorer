@@ -12,7 +12,7 @@ Since atoms, physicists have made stunning leaps towards creating a Theory of Ev
 
 The story that scientists tell usually ends at the mention of Quantum Mechanics, which describes the strange probablistic nature of particles. But there's more that you might not have heard of! Since the late 20th century, physicists have begun to describe the behavior of matter and forces, not as particles, but as small ripples in **fields**. This is the foundation of modern particle physics, and it's called "Quantum Field Theory". 
 
-This scientifically validated theory tells us that what we think of as particles can be thought of as ripples in fields, and the ways that these fields interact with each other explain the fundamental forces of nature. And just as Atomic Theory has a specific model of what the atom is, Quantum Field Theory has a specific model of what the fields are and how they interact; this is called "The Standard Model".
+This scientifically validated theory tells us that what we think of as particles can be thought of as ripples in fields, and the ways that these fields interact with each other explain the fundamental forces of nature. And just as Atomic Theory has a specific model of what the atom is, Quantum Field Theory has a specific model of what the fields are and how they interact; which is called "The Standard Model".
 
 
 ## Tangent: String Theory
