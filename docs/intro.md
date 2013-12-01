@@ -1,10 +1,10 @@
 Author: Jasper Palfree
 
-Everything you see, eat, touch, and breath is made of tiny things called atoms. Or at least that's what they told you in High School, right? Atoms are a bunch of electrons that surround a nucleus, and if you look more carefully, you can see that the nucleus is made up of smaller particles called protons and neutrons.
+Everything you see, eat, touch, and breath is made of tiny things called atoms. Atoms are a bunch of electrons that surround a nucleus, and if you look more carefully, you can see that the nucleus is made up of smaller particles called protons and neutrons.
 
 This way of looking at the world is called "Atomic Theory", and it took many great scientific minds years to construct and validate. And Atomic Theory is great! It helps us understand a lot of things about the world that used to confuse us.
 
-But science never stops asking: "why?".  And the more carefully you look, the more holes you find in Atomic Theory. It doesn't explain where forces like electricity and magnetism come from, and why some (supposedly) fundamental particles like neutrons, turn into other particles like protons and electrons. These gaps don't mean that Atomic Theory is "wrong", it just means there is a limit to its usefulness. After all, we don't throw up our hands and call hammers "useless" or "wrong" because they can't saw wood... 
+But science never stops asking: "why?".  And the more carefully you look, the more holes you find in Atomic Theory. It doesn't explain where forces of nature come from. Like the strong nuclear force that tightly grips protons and nutrons together to form the nucleus of an atom, or the electromagnetic force that attracts negatively charged electrons to the positively charged nucleus. It also doesn't explain why some (supposedly) fundamental particles like neutrons, can sometimes turn into other particles like protons and electrons. These gaps don't mean that Atomic Theory is "wrong", it just means there is a limit to its usefulness. After all, we don't throw up our hands and call hammers "useless" or "wrong" because they can't saw wood... 
 
 But it would be pretty great if there were a "multitool" of some kind that _could_ hammer a nail and saw a piece of wood. To physicists, this "multitool" is called a "Theory of Everything", which is a grandiose way of saying "a theory that describes the behavior of all matter and forces".
 
